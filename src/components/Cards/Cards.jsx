@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './Cards.css';
 import { numOfImagesOnSlide } from './config';
 import { Card } from '../Card/Card';

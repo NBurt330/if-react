@@ -1,0 +1,46 @@
+.top-apps {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.top-apps__google-play {
+    width: 135px;
+    height: 40px;
+}
+
+.top-apps__apple-store {
+    width: 120px;
+    height: 40px;
+}
+
+@media (max-width: 1024px) {
+    /*for mobile tablets*/
+    .top-apps {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .top-apps__google-play {
+        width: 135px;
+        height: 40px;
+    }
+
+    .top-apps__apple-store {
+        width: 120px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    /*for mobile phones*/
+    .top-apps {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+    }
+}
