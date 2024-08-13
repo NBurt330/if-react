@@ -11,14 +11,18 @@ import { TopApps } from '../TopApps/TopApps';
 import { FormMobile } from '../FormMobile/FormMobile';
 import { AvailableHotels } from '../AvailableHotels/AvailableHotels';
 import { Homes } from '../Homes/Homes';
-import { filteredHotels } from '../../assets/function';
-import { data } from '../Cards/config';
+import { NotFoundPage } from '../NotFoundPage/NotFoundPage';
+import { getAvailableHotels } from '../../services/functions';
+
+import { numOfImagesOnSlide } from '../Cards/config';
 
 import './App.css';
 
 export const App = () => {
     const [inputCity, setInputCity] = useState('');
     const [hotels, setHotels] = useState([]);
+    const [error, setError] = useState(null);
+
     const handleChange = (event) => {
         event.preventDefault();
         setInputCity(event.target.value);
@@ -26,7 +30,18 @@ export const App = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setHotels(filteredHotels(data, inputCity));
+        getAvailableHotels(inputCity)
+            .then((data) => {
+                const results = data.slice(0, numOfImagesOnSlide);
+                if (!results.length) {
+                    throw new Error('No data');
+                }
+                setHotels(results);
+                setError(null);
+            })
+            .catch((error) => {
+                setError(error.message);
+            });
         setInputCity('');
     };
 
@@ -52,8 +67,12 @@ export const App = () => {
                     <TopApps />
                 </Container>
             </Wrapper>
-            <AvailableHotels title="Available hotels" arr={hotels} />
-            <Homes title="Homes guests loves" arr={data} />
+            {error === null ? (
+                <AvailableHotels title="Available hotels" arr={hotels} />
+            ) : (
+                <NotFoundPage />
+            )}
+            <Homes title="Homes guests loves" />
         </>
     );
 };

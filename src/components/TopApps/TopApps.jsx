@@ -1,6 +1,5 @@
 import React from 'react';
 import './TopApps.css';
-
 export const TopApps = () => (
     <div className="top-apps">
         <div>
