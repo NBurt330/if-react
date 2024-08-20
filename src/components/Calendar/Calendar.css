@@ -1,0 +1,18 @@
+
+.top-search__field--data:focus-visible {
+    outline: none;
+    padding-top: 19px;
+    padding-bottom: 18px;
+    border: var(--accent-first) solid 3px;
+}
+
+.react-datepicker-wrapper {
+    width: 100%;
+}
+
+.react-datepicker {
+    display: flex;
+    align-self: flex-start;
+    left: 25%;
+    top: 12px;
+}
