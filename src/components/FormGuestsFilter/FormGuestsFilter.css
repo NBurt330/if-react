@@ -1,5 +1,3 @@
-
-
 .top-search__guests-filter {
     display: flex;
     flex-direction: column;
@@ -19,7 +17,6 @@
     flex-direction: row;
     align-items: center;
 }
-
 
 .disabled {
     display: none;

@@ -6,7 +6,6 @@
     margin: 0 auto 105px;
 }
 
-
 .services__title {
     padding-top: 120px;
     margin: 0 auto 104px;
@@ -20,7 +19,7 @@
 
 .services__title::after {
     display: block;
-    content: "";
+    content: '';
     width: 100px;
     height: 4px;
     background-color: var(--accent-first);
