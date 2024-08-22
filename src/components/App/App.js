@@ -6,7 +6,6 @@ import { Wrapper } from '../Wrapper/Wrapper';
 import { Header } from '../Header/Header';
 import { TopDiscover } from '../TopDiscover/TopDiscover';
 import { FormDesktop } from '../FormDesktop/FormDesktop';
-import { FormGuestsFilter } from '../FormGuestsFilter/FormGuestsFilter';
 import { TopApps } from '../TopApps/TopApps';
 import { FormMobile } from '../FormMobile/FormMobile';
 import { AvailableHotels } from '../AvailableHotels/AvailableHotels';
@@ -31,7 +30,6 @@ export const App = () => {
                     <TopDiscover className="top-discover" />
                     <Wrapper className="top-search_form">
                         <FormDesktop className="top-search top-search--large" />
-                        <FormGuestsFilter className="disabled" />
                         <FormMobile />
                     </Wrapper>
                     <TopApps />

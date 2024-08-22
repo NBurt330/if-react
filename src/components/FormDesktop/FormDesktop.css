@@ -98,6 +98,13 @@
     border: var(--accent-first) solid 3px;
 }
 
+.top-search__field--guests:focus-visible {
+    outline: none;
+    padding-top: 19px;
+    padding-bottom: 18px;
+    border: var(--accent-first) solid 3px;
+}
+
 .top-search__button {
     outline: 0;
     border: none;
