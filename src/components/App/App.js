@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import { Container } from '../Container/Container';
 import { Sprite } from '../Sprite/Sprite';
@@ -10,36 +10,36 @@ import { TopApps } from '../TopApps/TopApps';
 import { FormMobile } from '../FormMobile/FormMobile';
 import { AvailableHotels } from '../AvailableHotels/AvailableHotels';
 import { Homes } from '../Homes/Homes';
-import { NotFoundPage } from '../NotFoundPage/NotFoundPage';
+import { Loader } from '../Loader/Loader';
 
-import { useAvailableHotelsContext } from '../../contexts/AvailableHotels.context';
-
+import { FormContextProvider } from '../../contexts/Form.context';
+import { AvailableHotelsContextProvider } from '../../contexts/AvailableHotels.context';
 import './App.css';
 
 export const App = () => {
-    const { error } = useAvailableHotelsContext();
-
     return (
         <>
             <Sprite />
-            <Wrapper className="top">
-                <Container>
-                    <Header />
-                </Container>
-                <Container className="top-container">
-                    <TopDiscover className="top-discover" />
-                    <Wrapper className="top-search_form">
-                        <FormDesktop className="top-search top-search--large" />
-                        <FormMobile />
-                    </Wrapper>
-                    <TopApps />
-                </Container>
-            </Wrapper>
-            {error === false ? (
-                <AvailableHotels title="Available hotels" />
-            ) : (
-                <NotFoundPage />
-            )}
+            <AvailableHotelsContextProvider>
+                <Wrapper className="top">
+                    <Container>
+                        <Header />
+                    </Container>
+                    <Container className="top-container">
+                        <TopDiscover className="top-discover" />
+                        <Wrapper className="top-search_form">
+                            <FormContextProvider>
+                                <FormDesktop className="top-search top-search--large" />
+                                <FormMobile />
+                            </FormContextProvider>
+                        </Wrapper>
+                        <TopApps />
+                    </Container>
+                </Wrapper>
+                <Suspense fallback={<Loader />}>
+                    <AvailableHotels title="Available hotels" />
+                </Suspense>
+            </AvailableHotelsContextProvider>
             <Homes title="Homes guests loves" />
         </>
     );
