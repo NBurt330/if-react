@@ -6,11 +6,7 @@ export const getHotels = async () => {
     return data;
 };
 
-export const getAvailableHotels = async (str) => {
-    const { data } = await axios.get(apiHotelsUrl, {
-        params: {
-            search: str,
-        },
-    });
+export const getAvailableHotels = async () => {
+    const { data } = await axios.get(apiHotelsUrl);
     return data;
 };

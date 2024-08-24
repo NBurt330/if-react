@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { memo } from 'react';
+import { array, string, func } from 'prop-types';
 
 import DatePicker from 'react-datepicker';
 import classNames from 'classnames';
@@ -6,7 +7,8 @@ import classNames from 'classnames';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Calendar.css';
 
-export const Calendar = ({ className, dateRange, setDateRange }) => {
+// eslint-disable-next-line react/display-name
+export const Calendar = memo(({ className, dateRange, setDateRange }) => {
     const [startDate, endDate] = dateRange;
 
     const handleChange = (update) => {
@@ -34,4 +36,10 @@ export const Calendar = ({ className, dateRange, setDateRange }) => {
             </label>
         </div>
     );
+});
+
+Calendar.propTypes = {
+    className: string,
+    dateRange: array,
+    setDateRange: func,
 };
