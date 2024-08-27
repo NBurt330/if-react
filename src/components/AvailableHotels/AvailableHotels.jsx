@@ -28,20 +28,20 @@ export const AvailableHotels = ({ title }) => {
     }, [hotels]);
 
     if (!showAvailable) {
-        return <Section className="homes"></Section>;
+        return <Section className="hotels"></Section>;
     } else {
         return (
-            <Section className="homes">
+            <Section className="hotels">
                 <div ref={scrollRef}></div>
                 <Container>
                     <Title className="homes__title">{title}</Title>
                     {hotels.length > 0 ? (
                         <SearchCards
-                            className="homes__pictures"
+                            className="hotels__pictures"
                             arr={hotels}
                         ></SearchCards>
                     ) : (
-                        <p className="homes__pictures"> No results found</p>
+                        <p className="hotels__pictures"> No results found</p>
                     )}
                 </Container>
             </Section>

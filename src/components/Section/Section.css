@@ -1,3 +1,11 @@
 .homes {
     background-color: var(--background);
 }
+
+.hotels {
+    background-color: var(--background);
+}
+
+.hotel-page {
+    background-color: var(--accent-text);
+}

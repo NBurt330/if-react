@@ -1,0 +1,18 @@
+.dropdown {
+    position: absolute;
+    width: 192px;
+    top: calc(100% + 24px);
+    right: 0;
+    padding-bottom: 16px;
+    padding-top: 16px;
+    padding-left: 50px;
+    background-color: var(--main-color);
+    background-image: url(./../../images/vector.svg);
+    background-position: 16px;
+    background-repeat: no-repeat;
+    border: 1px solid var(--border-form);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    z-index: 31;
+}
