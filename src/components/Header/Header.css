@@ -3,12 +3,14 @@
 }
 
 .header__top {
+    position: relative;
     padding-bottom: 2px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     flex-shrink: 1;
+    z-index: 29;
 }
 
 .header__logo {
@@ -54,7 +56,13 @@
 .header__account {
     width: 40px;
     aspect-ratio: 1 / 1;
+    color: var(--main-color)
 }
+
+.header__account:hover {
+    color: var(--accent-first)
+}
+
 
 .header__menu {
     display: none;

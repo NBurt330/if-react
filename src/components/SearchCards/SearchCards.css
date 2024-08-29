@@ -1,15 +1,17 @@
-.homes__pictures {
+.hotels__pictures {
     margin-right: -8px;
     margin-left: -8px;
     display: flex;
     flex-direction: row;
+    gap: 16px;
     flex-wrap: wrap;
     padding-bottom: 120px;
+    text-decoration: none;
     position: relative;
     z-index: 7;
 }
 
-.homes__pictures::before {
+.hotels__pictures::before {
     display: block;
     content: '';
     width: 40px;
@@ -24,7 +26,7 @@
     z-index: 8;
 }
 
-.homes__pictures::after {
+.hotels__pictures::after {
     display: block;
     content: '';
     width: 8px;
@@ -38,13 +40,44 @@
     z-index: 9;
 }
 
+.hotels__picture {
+    padding-left: 8px;
+    padding-right: 8px;
+    object-position: center;
+    text-decoration: none;
+}
+
+.hotels__images {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: fill;
+}
+
+.hotels__name {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    color: var(--accent-second);
+    padding-top: 22px;
+    padding-bottom: 26px;
+    text-decoration: none;
+}
+
+.hotels__location {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    color: var(--accent-text);
+    text-decoration: none;
+}
+
 @media (max-width: 768px) {
     /*for mobile phones*/
-    .homes__pictures {
+    .hotels__pictures {
         padding-bottom: 40px;
     }
 
-    .homes__pictures::before {
+    .hotels__pictures::before {
         width: 28px;
         box-shadow: none;
         right: -4px;
@@ -52,11 +85,23 @@
         transform: translate(0, -50%);
     }
 
-    .homes__pictures::after {
+    .hotels__pictures::after {
         width: 5px;
         height: 13px;
         right: 8px;
         bottom: unset;
         top: calc((100% - 94px) / 2);
+    }
+
+    .hotels__name {
+        font-size: 12px;
+        line-height: 14px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+
+    .hotels__location {
+        font-size: 12px;
+        line-height: 14px;
     }
 }

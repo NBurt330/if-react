@@ -1,4 +1,5 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Container } from '../Container/Container';
 import { Sprite } from '../Sprite/Sprite';
@@ -11,12 +12,25 @@ import { FormMobile } from '../FormMobile/FormMobile';
 import { AvailableHotels } from '../AvailableHotels/AvailableHotels';
 import { Homes } from '../Homes/Homes';
 import { Loader } from '../Loader/Loader';
+import { Footer } from '../Footer/Footer';
 
 import { FormContextProvider } from '../../contexts/Form.context';
 import { AvailableHotelsContextProvider } from '../../contexts/AvailableHotels.context';
+import { useAuthContext } from '../../contexts/Auth.context';
+import { PATH } from '../../assets/constants';
+
 import './App.css';
 
 export const App = () => {
+    const navigate = useNavigate();
+    const { isLoggedIn } = useAuthContext();
+
+    useEffect(() => {
+        if (isLoggedIn === false) {
+            navigate(PATH.login);
+        }
+    }, []);
+
     return (
         <>
             <Sprite />
@@ -41,6 +55,7 @@ export const App = () => {
                 </Suspense>
             </AvailableHotelsContextProvider>
             <Homes title="Homes guests loves" />
+            <Footer className="footer" />
         </>
     );
 };

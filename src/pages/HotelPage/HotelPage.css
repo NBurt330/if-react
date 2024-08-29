@@ -1,0 +1,31 @@
+.hotel-page__images {
+    display: flex;
+    justify-items: center;
+    max-width: 33%;
+    aspect-ratio: 1/1;
+    object-fit: fill;
+    padding-bottom: 36px;
+
+}
+
+
+.hotel-page__location {
+    padding-bottom: 120px;
+    display: flex;
+    justify-items: center;
+    max-width: 33%;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+}
+
+@media (max-width: 768px) {
+    /*for mobile phones*/
+
+    .hotel-page__location {
+        display: flex;
+        justify-items: center;
+        font-size: 12px;
+        line-height: 14px;
+    }
+}
