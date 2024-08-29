@@ -30,12 +30,11 @@
 }
 
 .hotel-page__title {
-        padding-top: 120px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0 auto 110px;
-
+    padding-top: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 110px;
 }
 
 @media (max-width: 768px) {

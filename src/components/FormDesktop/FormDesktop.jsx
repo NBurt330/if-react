@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { Calendar } from '../Calendar/Calendar';
 import { FormGuestsFilter } from '../FormGuestsFilter/FormGuestsFilter';
 
+import { searchHotels } from '../../store/actions';
+
 import { useFormContext } from '../../contexts/Form.context';
-import { useAvailableHotelsContext } from '../../contexts/AvailableHotels.context';
 
 import './FormDesktop.css';
+import { apiHotelsUrl } from '../../services/constants';
 
 export const FormDesktop = ({ className }) => {
     const [showFormGuestFilter, setShowFormGuestFilter] = useState(false);
+    const [query, setQuery] = useState('');
 
     const {
         inputCity,
@@ -21,17 +25,27 @@ export const FormDesktop = ({ className }) => {
         childrenCount,
     } = useFormContext();
 
-    const { setShowAvailable, setCityName } = useAvailableHotelsContext();
+    const dispatch = useDispatch();
 
     const handleChange = (event) => {
         event.preventDefault();
         setInputCity(event.target.value);
+        setQuery(event.target.value);
+    };
+
+    const searchUrlHotels = (url) => {
+        const paramUrl = new URL(url);
+        paramUrl.searchParams.set('search', query);
+        //   url.searchParams.set('adults', `${adultsInputEL.value}`);
+        //    url.searchParams.set('children', searchChildrenParamsString());
+        //   url.searchParams.set('rooms', `${roomsInputEL.value}`);
+        return paramUrl;
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setShowAvailable(true);
-        setCityName(inputCity);
+        setQuery(inputCity);
+        dispatch(searchHotels(searchUrlHotels(apiHotelsUrl)));
         setInputCity('');
     };
 
@@ -47,6 +61,7 @@ export const FormDesktop = ({ className }) => {
                     <input
                         type="text"
                         id="city"
+                        name="city"
                         value={inputCity}
                         placeholder="New York"
                         className="top-search__field top-search__field--city"
@@ -61,6 +76,7 @@ export const FormDesktop = ({ className }) => {
                 </div>
                 <Calendar
                     className="top-search__column--data"
+                    name="calendar"
                     setDateRange={setDateRange}
                     dateRange={dateRange}
                 />
@@ -68,6 +84,7 @@ export const FormDesktop = ({ className }) => {
                     <input
                         type="text"
                         id="people"
+                        name="people"
                         value={`${adults} Adults — ${childrenCount} Children — ${rooms} Room`}
                         className="top-search__field top-search__field--guests"
                         onClick={handleFormGuestFilter}

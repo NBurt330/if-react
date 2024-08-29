@@ -56,13 +56,12 @@
 .header__account {
     width: 40px;
     aspect-ratio: 1 / 1;
-    color: var(--main-color)
+    color: var(--main-color);
 }
 
 .header__account:hover {
-    color: var(--accent-first)
+    color: var(--accent-first);
 }
-
 
 .header__menu {
     display: none;
