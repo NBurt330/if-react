@@ -1,35 +1,34 @@
-import React, { useId, useState } from 'react';
+import React, { useId } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { Header } from '../../components/Header/Header';
 import { Sprite } from '../../components/Sprite/Sprite';
 import { Container } from '../../components/Container/Container';
 import { Wrapper } from '../../components/Wrapper/Wrapper';
 
+import { PATH } from '../../assets/constants/constants';
+
 import './LoginPage.css';
-import { useAuthContext } from '../../contexts/Auth.context';
+import { setAuthStatus } from '../../store/actions/auth.actions';
+import { authStatuses as AUTH_STATUSES } from '../../assets/constants/authStatuses';
 
 export const LoginPage = () => {
-    const [userEmail, setUserEmail] = useState('');
-    const [userPassword, setUserPassword] = useState('');
-
-    const { logIn } = useAuthContext();
-
     const emailId = useId();
     const passwordId = useId();
 
-    const handleChangeEmail = (event) => {
-        event.preventDefault();
-        setUserEmail(event.target.value);
-    };
-
-    const handleChangePassword = (event) => {
-        event.preventDefault();
-        setUserPassword(event.target.value);
-    };
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleLogin = (event) => {
         event.preventDefault();
-        logIn(userEmail, userPassword);
+        const formData = new FormData(event.target);
+        const email = formData.get('email');
+        const password = formData.get('password');
+        if (email && password) {
+            dispatch(setAuthStatus(AUTH_STATUSES.loggedIn));
+            navigate(PATH.index);
+        }
     };
 
     return (
@@ -51,8 +50,6 @@ export const LoginPage = () => {
                                 id={emailId}
                                 type="email"
                                 placeholder="Email"
-                                value={userEmail}
-                                onChange={handleChangeEmail}
                             />
                             <label
                                 className="login__label"
@@ -66,17 +63,11 @@ export const LoginPage = () => {
                                 name="password"
                                 type="password"
                                 placeholder="Password"
-                                value={userPassword}
-                                onChange={handleChangePassword}
                             />
+                            <button className="login__button" type="submit">
+                                Sign In
+                            </button>
                         </form>
-                        <button
-                            className="login__button"
-                            type="submit"
-                            onClick={handleLogin}
-                        >
-                            Sign In
-                        </button>
                     </div>
                 </Container>
             </Wrapper>

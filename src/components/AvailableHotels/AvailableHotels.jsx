@@ -1,25 +1,19 @@
 import React, { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import { string } from 'prop-types';
 
 import { Section } from '../Section/Section';
 import { Container } from '../Container/Container';
 import { Title } from '../Title/Title';
 import { SearchCards } from '../SearchCards/SearchCards';
-
-import { useAvailableHotelsContext } from '../../contexts/AvailableHotels.context';
-
-import { fetchData, wrapPromise } from '../../lib/wrapPromise';
-import { apiHotelsUrl } from '../../services/constants';
-import { filteredHotels } from '../../assets/function';
+import { Loader } from '../Loader/Loader';
 
 export const AvailableHotels = ({ title }) => {
-    const scrollRef = useRef(null);
-    const { cityName, showAvailable } = useAvailableHotelsContext();
+    const hotels = useSelector((state) => state.hotels.hotels);
+    const loading = useSelector((state) => state.hotels.loading);
+    const error = useSelector((state) => state.hotels.error);
 
-    const hotels = filteredHotels(
-        wrapPromise(fetchData(apiHotelsUrl)),
-        cityName
-    );
+    const scrollRef = useRef(null);
 
     useEffect(() => {
         if (scrollRef.current) {
@@ -27,7 +21,10 @@ export const AvailableHotels = ({ title }) => {
         }
     }, [hotels]);
 
-    if (!showAvailable) {
+    if (loading) return <Loader />;
+    if (error) return <p> Error: {error}</p>;
+
+    if (hotels.length === 0) {
         return <Section className="hotels"></Section>;
     } else {
         return (
@@ -35,14 +32,10 @@ export const AvailableHotels = ({ title }) => {
                 <div ref={scrollRef}></div>
                 <Container>
                     <Title className="homes__title">{title}</Title>
-                    {hotels.length > 0 ? (
-                        <SearchCards
-                            className="hotels__pictures"
-                            arr={hotels}
-                        ></SearchCards>
-                    ) : (
-                        <p className="hotels__pictures"> No results found</p>
-                    )}
+                    <SearchCards
+                        className="hotels__pictures"
+                        arr={hotels}
+                    ></SearchCards>
                 </Container>
             </Section>
         );

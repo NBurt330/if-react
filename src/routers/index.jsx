@@ -4,7 +4,7 @@ import {
     Route,
 } from 'react-router-dom';
 
-import { PATH } from '../assets/constants';
+import { PATH } from '../assets/constants/constants';
 
 import { App } from '../components/App/App';
 import { SystemLayout } from '../components/SystemLayout/SystemLayout';

@@ -8,7 +8,7 @@ import {
     maxAdults,
     maxChildren,
     maxRooms,
-} from '../../assets/constants';
+} from '../../assets/constants/constants';
 
 import './FormGuestsFilter.css';
 import { useFormContext } from '../../contexts/Form.context';
@@ -102,6 +102,7 @@ export const FormGuestsFilter = memo(({ className }) => {
                 </button>
                 <input
                     type="text"
+                    name="adults"
                     value={adults}
                     id="adults-lg"
                     className="top-search__guest-input"
@@ -163,6 +164,7 @@ export const FormGuestsFilter = memo(({ className }) => {
                 </button>
                 <input
                     type="text"
+                    name="rooms"
                     value={rooms}
                     id="rooms-lg"
                     className="top-search__guest-input"

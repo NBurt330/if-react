@@ -1,11 +1,10 @@
-import React from 'react';
-import './Header.css';
+import React, { useState } from 'react';
 import { DropDown } from '../DropDown/DropDown';
-import { useAuthContext } from '../../contexts/Auth.context';
+
+import './Header.css';
 
 export const Header = () => {
-    const { showDropDown, setShowDropDown } = useAuthContext();
-
+    const [showDropDown, setShowDropDown] = useState(false);
     const handleClick = (event) => {
         event.preventDefault();
         setShowDropDown(!showDropDown);

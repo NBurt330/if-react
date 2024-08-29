@@ -1,16 +1,17 @@
 import React from 'react';
 import { Outlet, ScrollRestoration } from 'react-router-dom';
 import { Sprite } from '../Sprite/Sprite';
-import { AuthContextProvider } from '../../contexts/Auth.context';
+import { Provider } from 'react-redux';
+import { store } from '../../store';
 
 export const SystemLayout = () => {
     return (
         <>
             <ScrollRestoration />
             <Sprite />
-            <AuthContextProvider>
+            <Provider store={store}>
                 <Outlet />
-            </AuthContextProvider>
+            </Provider>
         </>
     );
 };
