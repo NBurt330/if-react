@@ -43,12 +43,12 @@ export const App = () => {
                 </Container>
                 <Container className="top-container">
                     <TopDiscover className="top-discover" />
-                    <Wrapper className="top-search_form">
-                        <FormContextProvider>
+                    <FormContextProvider>
+                        <Wrapper className="top-search_form">
                             <FormDesktop className="top-search top-search--large" />
                             <FormMobile />
-                        </FormContextProvider>
-                    </Wrapper>
+                        </Wrapper>
+                    </FormContextProvider>
                     <TopApps />
                 </Container>
             </Wrapper>

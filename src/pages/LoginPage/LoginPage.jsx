@@ -10,7 +10,7 @@ import { Wrapper } from '../../components/Wrapper/Wrapper';
 import { PATH } from '../../assets/constants/constants';
 
 import './LoginPage.css';
-import { setAuthStatus } from '../../store/actions/auth.actions';
+import { setStatus } from '../../store/slice/auth.slice';
 import { authStatuses as AUTH_STATUSES } from '../../assets/constants/authStatuses';
 
 export const LoginPage = () => {
@@ -26,7 +26,7 @@ export const LoginPage = () => {
         const email = formData.get('email');
         const password = formData.get('password');
         if (email && password) {
-            dispatch(setAuthStatus(AUTH_STATUSES.loggedIn));
+            dispatch(setStatus(AUTH_STATUSES.loggedIn));
             navigate(PATH.index);
         }
     };

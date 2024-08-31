@@ -1,7 +1,6 @@
 export const AUTH = {
     setStatus: 'auth/set-statuses',
 };
-
 export const USER = {
     set: 'user/set',
 };

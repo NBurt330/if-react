@@ -1,5 +1,9 @@
 import React, { createContext, useContext, useState } from 'react';
-import { minAdults, minChildren, minRooms } from '../assets/constants/constants';
+import {
+    minAdults,
+    minChildren,
+    minRooms,
+} from '../assets/constants/constants';
 
 const FormContext = createContext();
 
