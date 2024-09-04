@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Calendar } from '../Calendar/Calendar';
 import { FormGuestsFilter } from '../FormGuestsFilter/FormGuestsFilter';
 
-import { searchHotels } from '../../store/actions';
+import { searchHotels } from '../../store/slice/search.slice';
 
 import { useFormContext } from '../../contexts/Form.context';
 
@@ -13,7 +13,7 @@ import { apiHotelsUrl } from '../../services/constants';
 
 export const FormDesktop = ({ className }) => {
     const [showFormGuestFilter, setShowFormGuestFilter] = useState(false);
-    const [query, setQuery] = useState('');
+    const [cityInput, setCityInput] = useState('');
 
     const {
         inputCity,
@@ -23,28 +23,51 @@ export const FormDesktop = ({ className }) => {
         adults,
         rooms,
         childrenCount,
+        childrenAge,
     } = useFormContext();
 
     const dispatch = useDispatch();
 
     const handleChange = (event) => {
         event.preventDefault();
-        setInputCity(event.target.value);
-        setQuery(event.target.value);
-    };
-
-    const searchUrlHotels = (url) => {
-        const paramUrl = new URL(url);
-        paramUrl.searchParams.set('search', query);
-        //   url.searchParams.set('adults', `${adultsInputEL.value}`);
-        //    url.searchParams.set('children', searchChildrenParamsString());
-        //   url.searchParams.set('rooms', `${roomsInputEL.value}`);
-        return paramUrl;
+        if (event.target.name === 'city') {
+            setInputCity(event.target.value);
+            setCityInput(event.target.value);
+        }
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setQuery(inputCity);
+
+        const [startDate, endDate] = dateRange;
+
+        let startDateMc;
+        let endDateMc;
+        let childrenAgeString;
+
+        if (startDate !== null) {
+            startDateMc = startDate.getTime();
+        }
+
+        if (endDate !== null) {
+            endDateMc = endDate.getTime();
+        }
+
+        if (childrenAge) {
+            childrenAgeString = childrenAge.split().join(',');
+        }
+
+        const searchUrlHotels = (url) => {
+            const paramsUrl = new URL(url);
+            paramsUrl.searchParams.set('search', cityInput);
+            paramsUrl.searchParams.set('dateFrom', startDateMc);
+            paramsUrl.searchParams.set('dateTo', endDateMc);
+            paramsUrl.searchParams.set('adults', adults.toString());
+            paramsUrl.searchParams.set('children', childrenAgeString);
+            paramsUrl.searchParams.set('rooms', rooms.toString());
+            return paramsUrl;
+        };
+
         dispatch(searchHotels(searchUrlHotels(apiHotelsUrl)));
         setInputCity('');
     };
@@ -88,6 +111,7 @@ export const FormDesktop = ({ className }) => {
                         value={`${adults} Adults — ${childrenCount} Children — ${rooms} Room`}
                         className="top-search__field top-search__field--guests"
                         onClick={handleFormGuestFilter}
+                        onChange={handleChange}
                     />
                 </div>
 

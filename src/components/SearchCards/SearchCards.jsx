@@ -10,6 +10,7 @@ export const SearchCards = ({ className, arr }) => (
                 <NavLink
                     to={`/hotels/${str.id}`}
                     key={str.id}
+                    target="_blank"
                     className="col-lg-3 col-md-4 col-sm-3 hotels__picture"
                 >
                     <img

@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { DropDown } from '../DropDown/DropDown';
 
 import './Header.css';
 
 export const Header = () => {
     const [showDropDown, setShowDropDown] = useState(false);
-    const handleClick = (event) => {
-        event.preventDefault();
-        setShowDropDown(!showDropDown);
-    };
+
+    const handleClick = useCallback(
+        (event) => {
+            event.preventDefault();
+            setShowDropDown(!showDropDown);
+        },
+        [showDropDown]
+    );
 
     return (
         <header className="header">
