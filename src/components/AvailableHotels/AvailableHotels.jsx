@@ -8,12 +8,18 @@ import { Title } from '../Title/Title';
 import { SearchCards } from '../SearchCards/SearchCards';
 import { Loader } from '../Loader/Loader';
 
+import { useTheme } from 'react-jss';
+import { useAvailableHotelsStyles } from './AvailableHotels.Styles';
+
 export const AvailableHotels = ({ title }) => {
     const hotels = useSelector((state) => state.hotels.hotels);
     const loading = useSelector((state) => state.hotels.loading);
     const error = useSelector((state) => state.hotels.error);
 
     const scrollRef = useRef(null);
+
+    const theme = useTheme();
+    const classes = useAvailableHotelsStyles(theme);
 
     useEffect(() => {
         if (scrollRef.current) {
@@ -25,15 +31,15 @@ export const AvailableHotels = ({ title }) => {
     if (error) return <p> Error: {error}</p>;
 
     if (hotels.length === 0) {
-        return <Section className="hotels"></Section>;
+        return <Section className={classes.hotels}></Section>;
     } else {
         return (
-            <Section className="hotels">
+            <Section className={classes.hotels}>
                 <div ref={scrollRef}></div>
                 <Container>
-                    <Title className="homes__title">{title}</Title>
+                    <Title className={classes.hotelsTitle}>{title}</Title>
                     <SearchCards
-                        className="hotels__pictures"
+                        className={classes.hotelsPictures}
                         arr={hotels}
                     ></SearchCards>
                 </Container>

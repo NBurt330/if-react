@@ -1,14 +1,18 @@
 import React from 'react';
-import './TopApps.css';
-export const TopApps = () => (
-    <div className="top-apps">
-        <div>
-            <svg className="top-apps__google-play">
-                <use href="#google-play-badge"></use>
+import { useTopAppsStyles } from './TopAppsStyles';
+
+export const TopApps = () => {
+    const classes = useTopAppsStyles();
+    return (
+        <div className={classes.apps}>
+            <div>
+                <svg className={classes.googlePlay}>
+                    <use href="#google-play-badge"></use>
+                </svg>
+            </div>
+            <svg className={classes.appleStore}>
+                <use href="#apple-store-badge"></use>
             </svg>
         </div>
-        <svg className="top-apps__apple-store">
-            <use href="#apple-store-badge"></use>
-        </svg>
-    </div>
-);
+    );
+};

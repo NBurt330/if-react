@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import { Sprite } from '../Sprite/Sprite';
+
 import { persistor, store } from '../../store';
 
 export const SystemLayout = () => {

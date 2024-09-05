@@ -1,9 +1,4 @@
-.top-search__field--data:focus-visible {
-    outline: none;
-    padding-top: 19px;
-    padding-bottom: 18px;
-    border: var(--accent-first) solid 3px;
-}
+
 
 .react-datepicker-wrapper {
     width: 100%;

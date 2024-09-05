@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import './Cards.css';
-import { numOfImagesOnSlide } from './config';
+
 import { Card } from '../Card/Card';
 import { getHotels } from '../../services/functions';
+import { numOfImagesOnSlide } from './config';
 
+import { useCardsStyles } from './Cards.Styles';
 export const Cards = ({ className }) => {
     const [arr, setArr] = useState([]);
 
+    const classes = useCardsStyles();
     const fetchArr = () => {
         getHotels()
             .then((data) => {
@@ -28,7 +30,7 @@ export const Cards = ({ className }) => {
     return (
         <div className={className}>
             {arr.map((str) => (
-                <Card className="picture" key={str.id} {...str} />
+                <Card className={classes.picture} key={str.id} {...str} />
             ))}
         </div>
     );

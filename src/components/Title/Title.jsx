@@ -1,7 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
-import './Title.css';
+import { useTitleStyles } from './TitleStyles';
 
-export const Title = ({ className, children }) => (
-    <h2 className={classNames('title', className)}>{children}</h2>
-);
+export const Title = ({ className, children }) => {
+    const classes = useTitleStyles();
+    return <h2 className={classNames(classes.title, className)}>{children}</h2>;
+};

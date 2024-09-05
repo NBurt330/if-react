@@ -1,9 +1,16 @@
 import React from 'react';
-import './TopDiscover.css';
 
-export const TopDiscover = ({ className }) => (
-    <div className={className}>
-        <p>Discover stays</p>
-        <p>to live, work or just relax</p>
-    </div>
-);
+import { useTopDiscoverStyles } from './TopDiscoverStyles';
+import { useTheme } from 'react-jss';
+
+export const TopDiscover = () => {
+    const theme = useTheme();
+    const classes = useTopDiscoverStyles(theme);
+
+    return (
+        <div className={classes.topDiscover}>
+            <p>Discover stays</p>
+            <p>to live, work or just relax</p>
+        </div>
+    );
+};

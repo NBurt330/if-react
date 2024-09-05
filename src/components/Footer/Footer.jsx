@@ -1,30 +1,31 @@
 import React from 'react';
 
 import { footerConfig } from '../../assets/constants/footerConfig';
+import { useTheme } from 'react-jss';
+import { useFooterStyles } from './Footer.Stlyles';
 
-import './Footer.css';
-export const Footer = ({ className }) => {
+export const Footer = () => {
+    const theme = useTheme();
+    const classes = useFooterStyles(theme);
+
     return (
         <>
-            <footer className={className}>
-                <div className="container footer__container">
-                    <svg className="footer__logo">
+            <footer className={classes.footer}>
+                <div className={classes.footerContainer}>
+                    <svg className={classes.logo}>
                         <use href="#logo"></use>
                     </svg>
-                    <div className="footer__top">
+                    <div className={classes.top}>
                         {footerConfig.columns.map((column) => (
-                            <div
-                                key={column.title}
-                                className="footer__column col-lg-4 col-md-4 col-sm-6"
-                            >
-                                <h3 className="footer__headlines">
+                            <div key={column.title} className={classes.column}>
+                                <h3 className={classes.headlines}>
                                     {column.title}
                                 </h3>
-                                <ul className="footer__links">
+                                <ul className={classes.links}>
                                     {column.links.map((link) => (
                                         <li key={link.text}>
                                             <a
-                                                className="footer__link"
+                                                className={classes.link}
                                                 href={link.url}
                                             >
                                                 {link.text}
@@ -35,7 +36,7 @@ export const Footer = ({ className }) => {
                             </div>
                         ))}
                     </div>
-                    <div className="footer__copyright">
+                    <div className={classes.copyright}>
                         &#169; 2022Triphouse, Inc. All rights reserved
                     </div>
                 </div>

@@ -6,7 +6,7 @@ import { hotelApi } from '../services/functions';
 
 export const store = configureStore({
     reducer: rootReducer,
-  // eslint-disable-next-line no-undef
+    // eslint-disable-next-line no-undef
     devTools: process.env.NODE_ENV !== 'production',
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

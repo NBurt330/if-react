@@ -10,8 +10,10 @@ import {
     maxRooms,
 } from '../../assets/constants/constants';
 
-import './FormGuestsFilter.css';
 import { useFormContext } from '../../contexts/Form.context';
+
+import { useTheme } from 'react-jss';
+import { useFormGuestsFilterStyles } from './FormGuestsFilterStyles';
 
 // eslint-disable-next-line react/display-name
 export const FormGuestsFilter = memo(({ className }) => {
@@ -25,6 +27,9 @@ export const FormGuestsFilter = memo(({ className }) => {
         setRooms,
         setChildAge,
     } = useFormContext();
+
+    const theme = useTheme();
+    const classes = useFormGuestsFilterStyles(theme);
     const incrementValues = (event) => {
         if (event.target.id === 'btn-plus-adults') {
             setAdults((prev) => Math.min(prev + 1, maxAdults));
@@ -56,18 +61,18 @@ export const FormGuestsFilter = memo(({ className }) => {
 
     const formChildrenAge = useMemo(() => {
         return (
-            <div className="top-search__guest-filter">
-                <div className="top-search__children disabled">
-                    <h3 className="top-search__children-label">
+            <div className={classes.guestFilter}>
+                <div className={classes.children}>
+                    <h3 className={classes.childrenLabel}>
                         What is the age of the child you’re travelling with?
                     </h3>
-                    <div className="top-search__children-wrapper">
+                    <div className={classes.childrenWrapper}>
                         {Array.from({ length: childrenCount }, (_, index) => (
                             <select
                                 key={index}
                                 name="children-lg-age"
                                 value={childAge[index]}
-                                className="top-search__children-option"
+                                className={classes.hildrenOption}
                                 onChange={(e) =>
                                     handleChildAge(index, e.target.value)
                                 }
@@ -86,15 +91,15 @@ export const FormGuestsFilter = memo(({ className }) => {
     }, [childrenCount]);
 
     return (
-        <div className={classNames('top-search__guests-filter', className)}>
-            <form className="top-search__guest-filter">
-                <label htmlFor="adults-lg" className="top-search__label-filter">
+        <div className={classNames(classes.guestsFilter, className)}>
+            <form className={classes.guestFilter}>
+                <label htmlFor="adults-lg" className={classes.labelFilter}>
                     Adults
                 </label>
                 <button
                     id="btn-minus-adults"
                     type="button"
-                    className="btn-minus"
+                    className={classes.btnMinus}
                     disabled={adults <= minAdults}
                     onClick={decrementValues}
                 >
@@ -105,29 +110,26 @@ export const FormGuestsFilter = memo(({ className }) => {
                     name="adults"
                     value={adults}
                     id="adults-lg"
-                    className="top-search__guest-input"
+                    className={classes.guestInput}
                 />
                 <button
                     type="button"
                     id="btn-plus-adults"
-                    className="btn-plus"
+                    className={classes.btnPlus}
                     disabled={adults >= maxAdults}
                     onClick={incrementValues}
                 >
                     +
                 </button>
             </form>
-            <form className="top-search__guest-filter">
-                <label
-                    htmlFor="children-lg"
-                    className="top-search__label-filter"
-                >
+            <form className={classes.guestFilter}>
+                <label htmlFor="children-lg" className={classes.labelFilter}>
                     Children
                 </label>
                 <button
                     type="button"
                     id="btn-minus-children"
-                    className="btn-minus"
+                    className={classes.btnMinus}
                     disabled={childrenCount <= minChildren}
                     onClick={decrementValues}
                 >
@@ -137,26 +139,26 @@ export const FormGuestsFilter = memo(({ className }) => {
                     type="text"
                     value={childrenCount}
                     id="children-lg"
-                    className="top-search__guest-input"
+                    className={classes.guestInput}
                 />
                 <button
                     type="button"
                     id="btn-plus-children"
-                    className="btn-plus"
+                    className={classes.btnPlus}
                     disabled={childrenCount >= maxChildren}
                     onClick={incrementValues}
                 >
                     +
                 </button>
             </form>
-            <form className="top-search__guest-filter">
-                <label htmlFor="rooms-lg" className="top-search__label-filter">
+            <form className={classes.guestFilter}>
+                <label htmlFor="rooms-lg" className={classes.labelFilter}>
                     Rooms
                 </label>
                 <button
                     type="button"
                     id="btn-minus-rooms"
-                    className="btn-minus"
+                    className={classes.btnMinus}
                     disabled={rooms <= minRooms}
                     onClick={decrementValues}
                 >
@@ -167,12 +169,12 @@ export const FormGuestsFilter = memo(({ className }) => {
                     name="rooms"
                     value={rooms}
                     id="rooms-lg"
-                    className="top-search__guest-input"
+                    className={classes.guestInput}
                 />
                 <button
                     type="button"
                     id="btn-plus-rooms"
-                    className="btn-plus"
+                    className={classes.btnPlus}
                     disabled={rooms >= maxRooms}
                     onClick={incrementValues}
                 >

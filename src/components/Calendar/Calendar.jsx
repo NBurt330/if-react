@@ -7,18 +7,23 @@ import classNames from 'classnames';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Calendar.css';
 
+import './../FormDesktop/FormDesktop.Styles';
+import { useFormDesktopStyles } from '../FormDesktop/FormDesktop.Styles';
+
 // eslint-disable-next-line react/display-name
-export const Calendar = memo(({ className, dateRange, setDateRange }) => {
+export const Calendar = memo(({ dateRange, setDateRange }) => {
     const [startDate, endDate] = dateRange;
 
     const handleChange = (update) => {
         setDateRange(update);
     };
 
+    const classes = useFormDesktopStyles();
+
     return (
-        <div className={classNames('top-search__column', className)}>
+        <div className={classNames(classes.column, classes.searchColumnData)}>
             <DatePicker
-                className="top-search__field top-search__field--data"
+                className={`${classes.searchField} ${classes.searchFieldData}`}
                 selectsRange={true}
                 startDate={startDate}
                 endDate={endDate}
@@ -30,7 +35,7 @@ export const Calendar = memo(({ className, dateRange, setDateRange }) => {
             />
             <label
                 htmlFor="calendar"
-                className="top-search__label top-search__label--data"
+                className={`${classes.searchLabel} ${classes.searchLabelData}`}
             >
                 Check-in — Check-out
             </label>
