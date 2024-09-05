@@ -4,12 +4,15 @@ import { DropDown } from '../DropDown/DropDown';
 
 import { useHeaderStyles } from './HeaderStyles';
 import { useTheme } from 'react-jss';
+import { useDispatch } from 'react-redux';
+import { toggleTheme } from '../../store/slice/theme.slice';
 
-export const Header = ({ handleThemeChange }) => {
+export const Header = () => {
     const [showDropDown, setShowDropDown] = useState(false);
 
     const theme = useTheme();
     const classes = useHeaderStyles(theme);
+    const dispatch = useDispatch();
 
     const handleClick = useCallback(
         (event) => {
@@ -18,6 +21,10 @@ export const Header = ({ handleThemeChange }) => {
         },
         [showDropDown]
     );
+
+    const handleThemeChange = () => {
+        dispatch(toggleTheme()); // Dispatch action to change theme
+    };
 
     return (
         <header className={classes.header}>

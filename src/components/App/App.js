@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { ThemeProvider } from 'react-jss';
+import { useTheme } from 'react-jss';
 
 import { Container } from '../Container/Container';
 import { Sprite } from '../Sprite/Sprite';
@@ -18,7 +18,6 @@ import { FormContextProvider } from '../../contexts/Form.context';
 
 import { PATH } from '../../assets/constants/constants';
 import { authStatuses } from '../../assets/constants/authStatuses';
-import { darkTheme } from '../../styles/darkTheme';
 import { lightTheme } from '../../styles/lightTheme';
 import backgroundImgLight from './../../images/castelmezzano_light.jpeg';
 import backgroundImgDark from './../../images/castelmezzano.jpg';
@@ -27,14 +26,13 @@ import { useAppStyles } from './App.Styles';
 import { useGlobalStyles } from '../../styles/GlobalStyles';
 
 export const App = () => {
-    const [darkMode, setDarkMode] = useState(false);
-    const theme = darkMode ? darkTheme : lightTheme;
-
     useGlobalStyles();
 
+    const theme = useTheme();
     const classes = useAppStyles(theme);
 
-    const backgroundImg = darkMode ? backgroundImgLight : backgroundImgDark;
+    const backgroundImg =
+        theme === lightTheme ? backgroundImgDark : backgroundImgLight;
 
     const loggedOut = useSelector(
         (state) => state.auth.status !== authStatuses.loggedIn
@@ -48,35 +46,29 @@ export const App = () => {
         }
     }, [loggedOut]);
 
-    const handleThemeChange = () => {
-        setDarkMode(!darkMode);
-    };
-
     return (
         <>
-            <ThemeProvider theme={theme}>
-                <Sprite />
-                <Wrapper
-                    className={classes.top}
-                    style={{ backgroundImage: `url(${backgroundImg})` }}
-                >
-                    <Container>
-                        <Header handleThemeChange={handleThemeChange} />
-                    </Container>
-                    <Container className={classes.topContainer}>
-                        <TopDiscover />
-                        <FormContextProvider>
-                            <Wrapper className={classes.topSearchForm}>
-                                <FormDesktop />
-                            </Wrapper>
-                        </FormContextProvider>
-                        <TopApps />
-                    </Container>
-                </Wrapper>
-                <AvailableHotels title="Available hotels" />
-                <Homes title="Homes guests loves" />
-                <Footer />
-            </ThemeProvider>
+            <Sprite />
+            <Wrapper
+                className={classes.top}
+                style={{ backgroundImage: `url(${backgroundImg})` }}
+            >
+                <Container>
+                    <Header />
+                </Container>
+                <Container className={classes.topContainer}>
+                    <TopDiscover />
+                    <FormContextProvider>
+                        <Wrapper className={classes.topSearchForm}>
+                            <FormDesktop />
+                        </Wrapper>
+                    </FormContextProvider>
+                    <TopApps />
+                </Container>
+            </Wrapper>
+            <AvailableHotels title="Available hotels" />
+            <Homes title="Homes guests loves" />
+            <Footer />
         </>
     );
 };
