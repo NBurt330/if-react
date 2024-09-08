@@ -6,6 +6,7 @@ import { authReducer } from './auth.slice';
 import { userReducer } from './user.slice';
 import { searchReducer } from './search.slice';
 import { hotelApi } from '../../services/functions';
+import { themeReducer } from './theme.slice';
 
 const persistConfig = {
     key: 'root',
@@ -18,5 +19,6 @@ export const rootReducer = persistReducer(
         auth: authReducer,
         user: userReducer,
         hotels: searchReducer,
+        theme: themeReducer,
     })
 );
