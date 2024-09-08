@@ -1,6 +1,7 @@
 import React from 'react';
-import './Loader.css';
+import { useLoaderStyles } from './LoaderStyles';
 
 export const Loader = () => {
-    return <div className="spinner"></div>;
+    const classes = useLoaderStyles();
+    return <div className={classes.spinner}></div>;
 };

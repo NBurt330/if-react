@@ -18,8 +18,8 @@ export const router = createBrowserRouter(
         <Route element={<SystemLayout />}>
             <Route errorElement={<ErrorBoundary />}>
                 <Route path={PATH.index} element={<App />} />
-                <Route path={PATH.login} element={<LoginPage />} />
                 <Route path="hotels/:hotelId" element={<HotelPage />} />
+                <Route path={PATH.login} element={<LoginPage />} />
             </Route>
         </Route>
     )

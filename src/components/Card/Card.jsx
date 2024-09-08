@@ -1,17 +1,18 @@
 import React from 'react';
-import classNames from 'classnames';
 
-import './Card.css';
+import { useTheme } from 'react-jss';
+import { useCardStyles } from './Card.Styles';
 
-export const Card = ({ className, id, name, city, country, imageUrl }) => (
-    <div
-        key={id}
-        className={classNames('col-lg-3 col-md-4 col-sm-3', className)}
-    >
-        <img className="images" src={imageUrl} alt={name} />
-        <div className="name">{name}</div>
-        <div className="location">
-            {city}, {country}
+export const Card = ({ className, id, name, city, country, imageUrl }) => {
+    const theme = useTheme();
+    const classes = useCardStyles(theme);
+    return (
+        <div key={id} className={className}>
+            <img className={classes.images} src={imageUrl} alt={name} />
+            <div className={classes.name}>{name}</div>
+            <div className={classes.location}>
+                {city}, {country}
+            </div>
         </div>
-    </div>
-);
+    );
+};

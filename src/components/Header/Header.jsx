@@ -1,10 +1,15 @@
 import React, { useCallback, useState } from 'react';
+
 import { DropDown } from '../DropDown/DropDown';
 
-import './Header.css';
+import { useHeaderStyles } from './HeaderStyles';
+import { useTheme } from 'react-jss';
 
-export const Header = () => {
+export const Header = ({ handleThemeChange }) => {
     const [showDropDown, setShowDropDown] = useState(false);
+
+    const theme = useTheme();
+    const classes = useHeaderStyles(theme);
 
     const handleClick = useCallback(
         (event) => {
@@ -15,37 +20,40 @@ export const Header = () => {
     );
 
     return (
-        <header className="header">
-            <div className="header__top">
-                <svg className="header__logo">
+        <header className={classes.header}>
+            <div className={classes.topSection}>
+                <svg className={classes.headerLogo}>
                     <use href="#logo"></use>
                 </svg>
-                <nav className="header__navigation">
-                    <ul className="header__lists">
-                        <li className="header_list">
-                            <a className="header__link" href="#stays">
+                <nav className={classes.navigation}>
+                    <ul className={classes.headerLists}>
+                        <li className={classes.headerList}>
+                            <a className={classes.headerLink} href="#stays">
                                 Stays
                             </a>
                         </li>
-                        <li className="header_list">
-                            <a className="header__link" href="#attractions">
+                        <li className={classes.headerList}>
+                            <a
+                                className={classes.headerLink}
+                                href="#attractions"
+                            >
                                 Attractions
                             </a>
                         </li>
                     </ul>
-                    <ul className="header__lists">
-                        <li>
-                            <svg className="header__button">
+                    <ul className={classes.headerLists}>
+                        <li onClick={handleThemeChange}>
+                            <svg className={classes.headerButton}>
                                 <use href="#night"></use>
                             </svg>
                         </li>
                         <li onClick={handleClick}>
-                            <svg className="header__account">
+                            <svg className={classes.headerAccount}>
                                 <use href="#account"></use>
                             </svg>
                         </li>
-                        <li className="header__menu">
-                            <svg className="header__menu-button">
+                        <li className={classes.headerMenu}>
+                            <svg className={classes.headerMenuButton}>
                                 <use href="#menu"></use>
                             </svg>
                         </li>

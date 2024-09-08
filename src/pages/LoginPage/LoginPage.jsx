@@ -9,13 +9,20 @@ import { Wrapper } from '../../components/Wrapper/Wrapper';
 
 import { PATH } from '../../assets/constants/constants';
 
-import './LoginPage.css';
+import backgroundImg from './../../images/castelmezzano.jpg';
+
 import { setStatus } from '../../store/slice/auth.slice';
 import { authStatuses as AUTH_STATUSES } from '../../assets/constants/authStatuses';
+
+import { useGlobalStyles } from '../../styles/GlobalStyles';
+import { useLoginPageStyles } from './LoginPageStyles';
 
 export const LoginPage = () => {
     const emailId = useId();
     const passwordId = useId();
+
+    useGlobalStyles();
+    const classes = useLoginPageStyles();
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -34,37 +41,40 @@ export const LoginPage = () => {
     return (
         <>
             <Sprite />
-            <Wrapper className="top">
+            <Wrapper
+                className={classes.top}
+                style={{ backgroundImage: `url(${backgroundImg})` }}
+            >
                 <Container>
                     <Header />
 
-                    <div className="login">
-                        <h3 className="login__title">Sign In</h3>
-                        <form className="login__form" onSubmit={handleLogin}>
-                            <label className="login__label" htmlFor={emailId}>
+                    <div className={classes.login}>
+                        <h3 className={classes.title}>Sign In</h3>
+                        <form className={classes.form} onSubmit={handleLogin}>
+                            <label className={classes.label} htmlFor={emailId}>
                                 Email address
                             </label>
                             <input
-                                className="login__field"
+                                className={classes.field}
                                 name="email"
                                 id={emailId}
                                 type="email"
                                 placeholder="Email"
                             />
                             <label
-                                className="login__label"
+                                className={classes.label}
                                 htmlFor={passwordId}
                             >
                                 Password
                             </label>
                             <input
-                                className="login__field"
+                                className={classes.field}
                                 id={passwordId}
                                 name="password"
                                 type="password"
                                 placeholder="Password"
                             />
-                            <button className="login__button" type="submit">
+                            <button className={classes.button} type="submit">
                                 Sign In
                             </button>
                         </form>

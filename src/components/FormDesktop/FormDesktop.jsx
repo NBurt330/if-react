@@ -8,10 +8,12 @@ import { searchHotels } from '../../store/slice/search.slice';
 
 import { useFormContext } from '../../contexts/Form.context';
 
-import './FormDesktop.css';
 import { apiHotelsUrl } from '../../services/constants';
 
-export const FormDesktop = ({ className }) => {
+import { useTheme } from 'react-jss';
+import { useFormDesktopStyles } from './FormDesktop.Styles';
+
+export const FormDesktop = () => {
     const [showFormGuestFilter, setShowFormGuestFilter] = useState(false);
     const [cityInput, setCityInput] = useState('');
 
@@ -25,6 +27,9 @@ export const FormDesktop = ({ className }) => {
         childrenCount,
         childrenAge,
     } = useFormContext();
+
+    const theme = useTheme();
+    const classes = useFormDesktopStyles(theme);
 
     const dispatch = useDispatch();
 
@@ -79,49 +84,56 @@ export const FormDesktop = ({ className }) => {
 
     return (
         <>
-            <form className={className} onSubmit={handleSubmit}>
-                <div className="top-search__column top-search__column--city">
-                    <input
-                        type="text"
-                        id="city"
-                        name="city"
-                        value={inputCity}
-                        placeholder="New York"
-                        className="top-search__field top-search__field--city"
-                        onChange={handleChange}
-                    />
-                    <label
-                        htmlFor="city"
-                        className="top-search__label top-search__label--city"
+            <div className={classes.topSearchForm}>
+                <form className={classes.topSearch} onSubmit={handleSubmit}>
+                    <div
+                        className={`${classes.searchColumn} ${classes.searchColumnCity}`}
                     >
-                        Your destination or hotel name
-                    </label>
-                </div>
-                <Calendar
-                    className="top-search__column--data"
-                    name="calendar"
-                    setDateRange={setDateRange}
-                    dateRange={dateRange}
-                />
-                <div className="top-search__column top-search__column--guests">
-                    <input
-                        type="text"
-                        id="people"
-                        name="people"
-                        value={`${adults} Adults — ${childrenCount} Children — ${rooms} Room`}
-                        className="top-search__field top-search__field--guests"
-                        onClick={handleFormGuestFilter}
-                        onChange={handleChange}
+                        <input
+                            type="text"
+                            id="city"
+                            name="city"
+                            value={inputCity}
+                            placeholder="New York"
+                            className={`${classes.searchField} ${classes.searchFieldCity}`}
+                            onChange={handleChange}
+                        />
+                        <label
+                            htmlFor="city"
+                            className={`${classes.searchLabel} ${classes.searchLabelCity}`}
+                        >
+                            Your destination or hotel name
+                        </label>
+                    </div>
+                    <Calendar
+                        name="calendar"
+                        setDateRange={setDateRange}
+                        dateRange={dateRange}
                     />
-                </div>
+                    <div
+                        className={`${classes.searchColumn} ${classes.searchColumnGests}`}
+                    >
+                        <input
+                            type="text"
+                            id="people"
+                            name="people"
+                            value={`${adults} Adults — ${childrenCount} Children — ${rooms} Room`}
+                            className={`${classes.searchField} ${classes.searchFieldGuests}`}
+                            onClick={handleFormGuestFilter}
+                            onChange={handleChange}
+                        />
+                    </div>
 
-                <div className="top-search__column top-search__column--button col-md-12 col-sm-6">
-                    <button className="top-search__button">Search</button>
-                </div>
-            </form>
-            {showFormGuestFilter && (
-                <FormGuestsFilter className="top-search__guests-filter" />
-            )}
+                    <div
+                        className={`${classes.searchColumn} ${classes.columnButton} ${classes.colMd12} ${classes.colSm6}`}
+                    >
+                        <button className={classes.searchButton}>Search</button>
+                    </div>
+                </form>
+                {showFormGuestFilter && (
+                    <FormGuestsFilter className={classes.searchGuestsFilter} />
+                )}
+            </div>
         </>
     );
 };

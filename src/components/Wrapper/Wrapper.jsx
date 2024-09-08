@@ -1,6 +1,7 @@
 import React from 'react';
-import './Wrapper.css';
 
-export const Wrapper = ({ className, children }) => (
-    <div className={className}>{children}</div>
+export const Wrapper = ({ className, children, style }) => (
+    <div className={className} style={style}>
+        {children}
+    </div>
 );
