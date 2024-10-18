@@ -50,9 +50,9 @@ export const headerStyles = (theme) => ({
         lineHeight: '28px',
         color: theme.mainColor,
 
-        /*       '&::after': {
+        '&::after': {
             display: 'block',
-            content: '',
+            content: '""',
             width: 0,
             height: 4,
             backgroundColor: theme.accentFirst,
@@ -64,7 +64,7 @@ export const headerStyles = (theme) => ({
 
         '&:hover::after': {
             width: '84.75%',
-        }, */
+        },
     },
 
     headerButton: {

@@ -7,5 +7,4 @@ export const titleStyles = () => ({
         lineHeight: '47px',
     },
 });
-
 export const useTitleStyles = createUseStyles(titleStyles);

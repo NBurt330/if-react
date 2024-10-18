@@ -11,6 +11,7 @@ export const TopApps = () => {
                 </svg>
             </div>
             <svg className={classes.appleStore}>
+                {' '}
                 <use href="#apple-store-badge"></use>
             </svg>
         </div>
